@@ -7,6 +7,7 @@
  * by DIATOM Internet & Medien GmbH // 27.07.2009
  * by Proud Sourcing GmbH // 19.07.2013
  * by Joachim Barthel  // 25.07.2016
+ * by Gerd Krause @ PCSG - Computer & Internet Service OHG
  * -----------------------------------------------
  * / install
  *(1) insert your paths and data below //configuration
@@ -256,7 +257,7 @@ function getCategories()
                 {$expired}
                 seo.oxlang = {$mod_cnf['language']}
             GROUP BY
-                oxcats.oxid;";
+                oxcats.oxid, seo.oxseourl;";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
@@ -296,7 +297,7 @@ function getCmsSite()
                 {$expired}
                 AND seo.oxlang = {$mod_cnf['language']}
             GROUP BY
-                content.oxid;";
+                content.oxid, seo.oxseourl;";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
@@ -335,7 +336,7 @@ function getVendors()
                 {$expired}
                 seo.oxlang = {$mod_cnf['language']}
             GROUP BY
-                vendor.oxid;";
+                vendor.oxid, seo.oxseourl;";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
@@ -373,7 +374,7 @@ function getManufacturers()
                 {$expired}
                 seo.oxlang = {$mod_cnf['language']}
             GROUP BY
-                manufacturer.oxid;";
+                manufacturer.oxid, seo.oxseourl;";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
@@ -499,7 +500,7 @@ function getProducts($limit)
                 {$expired}
                 seo.oxstdurl LIKE ('%cnid=%')
             GROUP BY
-                oxart.oxid
+                oxart.oxid, seo.oxseourl
             LIMIT " . $start . " OFFSET " . $end . ";";
 
     foreach ($dbh->query($sql) as $row) {
@@ -540,7 +541,7 @@ function getProductsManufacturer()
                 {$expired}
                 seo.oxstdurl LIKE ('%mnid=%')
             GROUP BY
-                oxart.oxid";
+                oxart.oxid, seo.oxseourl";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
@@ -580,7 +581,7 @@ function getProductsVendor()
                 {$expired}
                 seo.oxstdurl LIKE ('%cnid=v%')
             GROUP BY
-                oxart.oxid";
+                oxart.oxid, seo.oxseourl";
 
     foreach ($dbh->query($sql) as $row) {
         $list[] = [
